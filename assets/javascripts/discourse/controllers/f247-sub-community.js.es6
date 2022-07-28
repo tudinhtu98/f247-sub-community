@@ -8,6 +8,6 @@ export default Controller.extend({
     },
 
     actions: {
-        //function using in /templates/name.hbs
+        //function using in /templates/f247-sub-community.hbs
     }
 });
