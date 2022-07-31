@@ -1,0 +1,48 @@
+<div class="not-mobile">
+  {{mount-widget
+    widget="list-button-stock-data-widget"
+    args=(hash isMobile=false)
+    }}
+</div>
+<div class="not-desktop">
+  {{mount-widget
+    widget="list-button-stock-data-widget"
+    args=(hash isMobile=true)
+    }}
+</div>
+<div class="container">
+  <div class="search-section">
+    <div class="search">
+      <h4 class="title">CỘNG ĐỒNG CỔ ĐÔNG</h4>
+      <div class="box-search inline-form">
+        {{input class="input-search" placeholder="Tìm tên cộng đồng, mã chứng khoán, ..." type="search"}}
+      </div>
+    </div>
+  </div>
+  
+  <div class="grid">
+    <div class="flex-container">
+      <div class="flex-item-left"><h1>Danh sách cộng đồng</h1></div>
+      <div class="flex-item-right">
+        <a>Đăng kí tạo Cộng đồng cổ đông</a>
+      </div>
+    </div>
+    <div class="grid__layout">
+      {{#each communities as |community|}}
+      <div class="grid__item">
+        <div class="">
+          <a><img src={{community.img}} alt="Avatar" style="width:100%" class="card"></a>
+          <div class="container">
+            <a>
+              <p class="title-community">{{community.name}}</p>
+              <p class="detail">{{community.n_members}}</p>
+              <p class="detail">{{community.n_topics}}</p>
+            </a>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+      {{conditional-loading-spinner condition=loading}}
+    </div>
+  </div>
+</div>

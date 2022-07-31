@@ -15,5 +15,6 @@ after_initialize do
         # # Map the path `/f247-sub-community` to `F247SubCommunityController`’s `index` method
         # # Remove route if not in use
         get '/f247-sub-community' => 'f247_sub_community#index'
+        get '/cong-dong-con' => 'f247_sub_community#communities'
     end
 end
