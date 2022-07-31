@@ -4,5 +4,6 @@
  */
 
 export default function () {
-    this.route('f247-sub-community', { path: '/f247-sub-community' })
+  this.route("f247-sub-community", { path: "/f247-sub-community" });
+  this.route("list-community", { path: "/cong-dong-con" });
 }
