@@ -2,3 +2,5 @@ en:
   js:
     f247_sub_community:
       title: 'F247 sub community'
+      user:
+        community_participated: 'Community participated'
