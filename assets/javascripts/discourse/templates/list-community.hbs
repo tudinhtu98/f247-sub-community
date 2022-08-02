@@ -1,3 +1,4 @@
+{{plugin-outlet name="whos-viewing-news-details"}}
 <div class="not-mobile">
   {{mount-widget
     widget="list-button-stock-data-widget"
@@ -15,7 +16,7 @@
     <div class="search">
       <h4 class="title">CỘNG ĐỒNG CỔ ĐÔNG</h4>
       <div class="box-search inline-form">
-        {{input class="input-search" placeholder="Tìm tên cộng đồng, mã chứng khoán, ..." type="search"}}
+        {{input class="input-search" placeholder="Tìm tên cộng đồng, mã chứng khoán, ..." type="search" input=(action "filterCommunities" value="target.value")}}
       </div>
     </div>
   </div>
@@ -24,11 +25,11 @@
     <div class="flex-container">
       <div class="flex-item-left"><h1>Danh sách cộng đồng</h1></div>
       <div class="flex-item-right">
-        <a>Đăng kí tạo Cộng đồng cổ đông</a>
+        <a target="_blank" rel="noopener noreferrer" href="https://docs.google.com/forms/d/1u5s0ir-k2ToCLxvYBc6e-w3E3dPE4IMCCTT67c-gi_Y/edit?usp=sharing">Đăng kí tạo Cộng đồng cổ đông</a>
       </div>
     </div>
     <div class="grid__layout">
-      {{#each communities as |community|}}
+      {{#each filterCommunities as |community|}}
       <div class="grid__item">
         <div class="">
           <a><img src={{community.img}} alt="Avatar" style="width:100%" class="card"></a>

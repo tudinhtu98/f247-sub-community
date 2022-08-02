@@ -1,54 +1,32 @@
-import Controller, { inject as controller } from "@ember/controller";
+import Controller from "@ember/controller";
 import discourseComputed from "discourse-common/utils/decorators";
+import discourseDebounce from "discourse-common/lib/debounce";
+import { get } from "@ember/object";
+import { INPUT_DELAY } from "discourse-common/config/environment";
 
 export default Controller.extend({
-  @discourseComputed
-  communities() {
-    return [
-      {
-        name: "On The Road",
-        n_members: "3 thành viên mới",
-        n_topics: "3 chủ đề mới",
-        img:
-          "https://photo2.tinhte.vn/data/attachment-files/2021/08/5577318_og.jpg",
-      },
-      {
-        name: "Phím cơ",
-        n_members: "3 thành viên mới",
-        n_topics: "3 chủ đề mới",
-        img:
-          "https://photo2.tinhte.vn/data/attachment-files/2021/08/5577318_og.jpg",
-      },
-      {
-        name: "Hiệp Sĩ",
-        n_members: "3 thành viên mới",
-        n_topics: "3 chủ đề mới",
-        img:
-          "https://photo2.tinhte.vn/data/attachment-files/2021/08/5577318_og.jpg",
-      },
-      {
-        name: "Android",
-        n_members: "3 thành viên mới",
-        n_topics: "3 chủ đề mới",
-        img:
-          "https://photo2.tinhte.vn/data/attachment-files/2021/08/5577318_og.jpg",
-      },
-      {
-        name: "Sống khỏe mùa dịch",
-        n_members: "3 thành viên mới",
-        n_topics: "3 chủ đề mới",
-        img:
-          "https://photo2.tinhte.vn/data/attachment-files/2021/08/5577318_og.jpg",
-      },
-      {
-        name: "Gaming Laptop",
-        n_members: "3 thành viên mới",
-        n_topics: "3 chủ đề mới",
-        img:
-          "https://photo2.tinhte.vn/data/attachment-files/2021/08/5577318_og.jpg",
-      },
-    ];
+  filter: null,
+
+  @discourseComputed("model.communities", "filter")
+  filterCommunities(communities, filter) {
+    if (filter) {
+      filter = filter.toLowerCase();
+      communities = communities.filter((community) => {
+        return (
+          (get(community, "name") || "").toLowerCase().indexOf(filter) > -1
+        );
+      });
+    }
+    return communities;
   },
 
-  actions: {},
+  actions: {
+    filterCommunities(filter) {
+      discourseDebounce(this, this._debouncedFilter, filter, INPUT_DELAY);
+    },
+  },
+
+  _debouncedFilter(filter) {
+    this.set("filter", filter);
+  },
 });
