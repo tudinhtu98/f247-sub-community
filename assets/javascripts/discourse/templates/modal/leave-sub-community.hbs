@@ -1,0 +1,15 @@
+{{#d-modal-body id="modal-leave-sub-community" autoFocus="false" title="f247_sub_community.notice"}}
+<div class="copied-text">Bạn có chắc muốn rời khỏi cộng đồng?</div>
+{{/d-modal-body}}
+
+<div class="modal-footer">
+  <div class="modal-leave-sub-community-footer">
+    {{d-button
+    action=(action "agreeLeave")
+    class="btn btn-primary"
+    icon="sign-out-alt"
+    label="f247_sub_community.agree"
+    }}
+    {{d-modal-cancel close=(route-action "closeModal")}}
+  </div>
+</div>
